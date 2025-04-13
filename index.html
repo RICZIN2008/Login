@@ -4,28 +4,41 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
       font-family: Arial, sans-serif;
       background: #f0f0f0;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
     }
+
     .login-box {
       background: white;
       padding: 30px;
+      margin: 10px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      text-align: center;
+      height: calc(100% - 20px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
+
     input[type="password"] {
       padding: 10px;
       margin: 10px 0;
       width: 100%;
+      max-width: 300px;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+
     button {
       padding: 10px 20px;
       border: none;
@@ -36,19 +49,27 @@
       cursor: pointer;
       margin: 5px;
     }
+
     button:disabled {
       background: #aaa;
     }
+
     .key-display {
       margin-top: 20px;
       font-size: 18px;
       font-weight: bold;
       color: #333;
     }
+
     .countdown {
       margin-top: 10px;
       font-size: 16px;
       color: #777;
+    }
+
+    #copiarBtn {
+      display: none;
+      background: #28a745;
     }
   </style>
 </head>
@@ -63,6 +84,7 @@
   <button id="gerarBtn">Gerar Chave Temporária</button>
   <div class="countdown" id="countdown"></div>
   <div class="key-display" id="chaveGerada"></div>
+  <button id="copiarBtn">Copiar Chave</button>
 </div>
 
 <script>
@@ -71,6 +93,7 @@
   const countdownEl = document.getElementById("countdown");
   const chaveGeradaEl = document.getElementById("chaveGerada");
   const inputSenha = document.getElementById("senha");
+  const copiarBtn = document.getElementById("copiarBtn");
 
   const chaveDono = "Ric.zin.7.";
   let chaveTemporaria = null;
@@ -90,6 +113,7 @@
 
   gerarBtn.addEventListener("click", () => {
     gerarBtn.disabled = true;
+    copiarBtn.style.display = "none";
     let tempo = 7;
     countdownEl.textContent = `Gerando chave em ${tempo} segundos...`;
 
@@ -103,13 +127,22 @@
         chaveGeradaEl.textContent = `Chave temporária: ${chaveTemporaria}`;
         countdownEl.textContent = '';
         gerarBtn.disabled = false;
+        copiarBtn.style.display = "inline-block";
       }
     }, 1000);
   });
 
+  copiarBtn.addEventListener("click", () => {
+    if (chaveTemporaria) {
+      navigator.clipboard.writeText(chaveTemporaria).then(() => {
+        copiarBtn.textContent = "Copiado!";
+        setTimeout(() => copiarBtn.textContent = "Copiar Chave", 2000);
+      });
+    }
+  });
+
   acessarBtn.addEventListener("click", () => {
     const senhaDigitada = inputSenha.value.trim();
-
     if (senhaDigitada === chaveDono || senhaDigitada === chaveTemporaria) {
       window.location.href = "https://riczin2008.github.io/TD7/";
     } else {
