@@ -15,43 +15,50 @@
       width: 100%;
       font-family: Arial, sans-serif;
       background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
     }
 
     .login-box {
       background: white;
-      padding: 30px;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      height: calc(100% - 20px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
     }
 
     input[type="password"] {
-      padding: 10px;
-      margin: 10px 0;
+      padding: 12px;
+      margin: 15px 0;
       width: 100%;
-      max-width: 300px;
-      border-radius: 5px;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 16px;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       border: none;
       background: #007BFF;
       color: white;
       font-weight: bold;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      margin: 5px;
+      margin: 8px;
+      font-size: 15px;
     }
 
     button:disabled {
       background: #aaa;
+    }
+
+    #copiarBtn {
+      display: none;
+      background: #28a745;
     }
 
     .key-display {
@@ -65,11 +72,6 @@
       margin-top: 10px;
       font-size: 16px;
       color: #777;
-    }
-
-    #copiarBtn {
-      display: none;
-      background: #28a745;
     }
   </style>
 </head>
